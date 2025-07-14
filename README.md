@@ -37,3 +37,10 @@
 	3) 	Retry Time:		(Optional: If blank = 0)
 	4)	Result File Name	(Optional: If blank = rushti.csv)
 >
+#### View: 2.1 NORM - Process Setting - Configure your rushti processes list
+>
+	1) 	InstanceName:		(Optional: If blank = Default InstanceName from cube: 'Sys RushTI Paramter')
+	2)	WAIT:			(If 1 = RushTI will wait until above process completed)
+	3)	ProcessName:		(Required: process name from dim: }APQ Processes)
+	4)	Comment:		(Optional: leave commet for your configuration)
+>
