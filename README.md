@@ -1,3 +1,18 @@
+<img width="460" height="330" alt="Hold_wo_BK" src="https://github.com/user-attachments/assets/deb6e321-a4c2-472c-8d2f-c57664f5d089" />
+
+# Why use RUSHT_CFG?
+RUSHTI_CFG is a TM1 model that centralizes and simplifies RushTI usage. It improves development, maintenance, and collaboration by managing all configurations within TM1 cubes.
+
+✅ Key Benefits
+* Faster Setup
+> No need to manually create ```config.ini``` or ```task.txt```.
+* Centralized Management
+> All RushTI tasks are defined in one shared location.
+* Easier Maintenance
+> Quickly update TI references when logic changes.
+* Team Visibility
+> Developers can view and reuse existing RushTI setups.
+
 # Installation
 
 1. Download and put all rushti_cfg related objects from 'lib' folder to target instance data folder
