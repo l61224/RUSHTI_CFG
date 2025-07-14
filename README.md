@@ -74,3 +74,16 @@ RUSHTI_CFG is a TM1 model that centralizes and simplifies [RushTI](https://githu
   	3) 	pWaitExeCmd: 	(Optional: If blank = 0 = DO NOT WAIT, HIGHLY recommended that set 'pWaitExeCmd' = 0 when USER trigger (to avoid deadlock))
    	4) 	pSleepTime: 	(Optional (If blank = DO NOT SLEEP/ 1 = 1 second, 'pSleepTime' to let the user wait a few seconds before RushTI call the task file)
 >
+
+# 🙏 Community & Contribution
+Thank you for checking out RUSHTI_CFG! This project is an ongoing effort to simplify TM1 [RushTI](https://github.com/cubewise-code/rushti) usage and help the community improve automation and collaboration.
+
+If you find this useful or have ideas to make it better, please feel free to:
+* Open issues to report bugs or request features
+* Submit pull requests with improvements or fixes
+* Share your feedback and use cases to help evolve this tool
+
+Your contributions and suggestions are highly welcome — together we can build a stronger TM1 developer ecosystem! 🚀
+
+# LICENSE
+This project is licensed under the MIT License - see the LICENSE file for details
