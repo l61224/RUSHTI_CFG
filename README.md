@@ -86,4 +86,6 @@ If you find this useful or have ideas to make it better, please feel free to:
 Your contributions and suggestions are highly welcome — together we can build a stronger TM1 developer ecosystem! 🚀
 
 # LICENSE
-This project is licensed under the MIT License - see the LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/l61224/RUSHTI_CFG/blob/main/LICENSE) file for details.
+
+
