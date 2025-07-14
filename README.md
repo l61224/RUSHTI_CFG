@@ -45,15 +45,15 @@
 	4)	Comment:		(Optional: leave commet for your configuration)
 >
 #### View: 2.2 NORM - Process Param. Configuration - Configure your paramters by process
->
+>	
 	1) 	ParamType:
->	Blank 	= Pass nothing, this will use TI default Value in prompt
->	Value 	= Pass Fixed Value ( You can use <<pParam>> to replace when executing TI: 'Sys.RushTI Configuration.Caller')
->	MDX	= Pass MDX ( RushTI will trigger this process per element in the MDX result set)
+		Blank 	= Pass nothing, this will use TI default Value in prompt
+		Value 	= Pass Fixed Value ( You can use <<pParam>> to replace when executing TI: 'Sys.RushTI Configuration.Caller')
+		MDX	= Pass MDX ( RushTI will trigger this process per element in the MDX result set)
 	2) 	ParamValue
->	Blank 	= Pass blank
->	Value 	= You can use <<pParam>> to replace when executing TI: 'Sys.RushTI Configuration.Caller'
->	MDX	= You can use <<pMDX>> to replace part/ whole mdx when executing TI: 'Sys.RushTI Configuration.Caller' (Do NOT USE "=" in mdx)
+		Blank 	= Pass blank
+		Value 	= You can use <<pParam>> to replace when executing TI: 'Sys.RushTI Configuration.Caller'
+		MDX	= You can use <<pMDX>> to replace part/ whole mdx when executing TI: 'Sys.RushTI Configuration.Caller' (Do NOT USE "=" in mdx)
 
 >
 2. ⚙️Run TI: 'Sys.RushTI Configuration.Caller' to start your 1st rushti_cfg
