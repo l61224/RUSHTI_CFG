@@ -1,25 +1,20 @@
 <img width="460" height="330" alt="Hold_wo_BK" src="https://github.com/user-attachments/assets/deb6e321-a4c2-472c-8d2f-c57664f5d089" />
 
-# Why use RUSHT_CFG?
-RUSHTI_CFG is a TM1 model that centralizes and simplifies RushTI usage. It improves development, maintenance, and collaboration by managing all configurations within TM1 cubes.
+# ❓Why use RUSHT_CFG?
+RUSHTI_CFG is a TM1 model that centralizes and simplifies [RushTI](https://github.com/cubewise-code/rushti) usage. It improves development, maintenance, and collaboration by managing all configurations within TM1 cubes.
 
-✅ Key Benefits
-* Faster Setup
-> No need to manually create ```config.ini``` or ```task.txt```.
-* Centralized Management
-> All RushTI tasks are defined in one shared location.
-* Easier Maintenance
-> Quickly update TI references when logic changes.
-* Team Visibility
-> Developers can view and reuse existing RushTI setups.
+* Faster: 	```config.ini``` and ```task.txt``` maintained by cube view.
+* Centralized: 	All RushTI tasks are defined in one cube.
+* Maintenance: 	Quickly update TI parameters when changes.
+* Team Work: 	Developers can view and reuse existing RushTI setups.
 
-# Installation
+# 📒Installation
 
 1. Download and put all rushti_cfg related objects from 'lib' folder to target instance data folder
 2. Restart instance
 
-# Configuration/ Testing
-1. ✏️Open cube: 'Sys RushTI Parameter' and maintain following information:
+# ✏️Configuration/ Testing
+1. Open cube: 'Sys RushTI Parameter' and maintain following information:
 >
 	1)	RushTI.py Path 			(e.g. D:/DBs/RushTI_Cfg/Script/rushti.py)
 	2)	RushTI Config.ini Path 		(e.g. D:/DBs/RushTI_Cfg/Script/config.ini)
@@ -27,24 +22,24 @@ RUSHTI_CFG is a TM1 model that centralizes and simplifies RushTI usage. It impro
 	4) 	RushTI Task Export Folder 	(e.g. D:/DBs/RushTI_Cfg/Export/RushTI)
 	5) 	Default Instance Name 		(e.g. RushTI_Cfg)
 >
-2. ✏️Open cube: 'Sys RushTI Instance Information' and maintain following information:
+2. ✏Open cube: 'Sys RushTI Instance Information' and maintain following information:
 >
 	1)	Instance Name:	(Required: Any Instnace Name your want/ Any name possible/ sensitive)
 	2)	Admin Host:	(Required: Admin host in ./instance/cfg/tm1s.cfg)
 	4)	HTTP Port:	(Required: HTTPPORTNumber in ./instance/cfg/tm1s.cfg)
 	5)	CAM Namespace:	(Optional)
-	6)	User:		(Required: Recommand to use 
+	6)	User:		(Required)
 	7)	Password:	(Required)
 	8)	SSL: 		(Required)
 	9)	Base64 Decode:	(Optional: Recommand to use base64 decode to avoid Special symbols in password)
 >
-3. ⚙️Run TI: 'Sys.RushTI Instance Information.Update' to update ./rushti-master/config.ini content
-4. ⚙️Run TI: 'Sys.RushTI Configuration.Caller' to check rushti connection
+3. Run TI: 'Sys.RushTI Instance Information.Update' to update ./rushti-master/config.ini content
+4. Run TI: 'Sys.RushTI Configuration.Caller' to check rushti connection
 >
 >	pRushTIID = Z999
 >
-# Start your 1st rushti_cfg💪
-1. ✏️Open cube: 'Sys RushTI Configuration' and maintain following information:
+# 💪Start your 1st rushti_cfg
+1. Open cube: 'Sys RushTI Configuration' and maintain following information:
 #### View: 1. RushTI Default Config
 >
 	1)	Mode:	NORM/ OPT	(Optional: Normal Mode/ Optimized Mode, If blank = NORM)
@@ -71,7 +66,7 @@ RUSHTI_CFG is a TM1 model that centralizes and simplifies RushTI usage. It impro
 		MDX	= You can use <<pMDX>> to replace part/ whole mdx when executing TI: 'Sys.RushTI Configuration.Caller' (Do NOT USE "=" in mdx)
 
 >
-2. ⚙️Run TI: 'Sys.RushTI Configuration.Caller' to start your 1st rushti_cfg
+2. Run TI: 'Sys.RushTI Configuration.Caller' to start your 1st rushti_cfg
 >
 	1)  	pRushTIID: 	(Required: which you configured in cube: 'Sys RushTI Configuration')
  	2) 	pParaReplace: 	(Optional: split by comma, eg. <<pParam>>:10, <<pMDX>>:{[Year].[2025]+[Year].[2026]})
