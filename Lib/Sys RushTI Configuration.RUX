@@ -1,0 +1,175 @@
+﻿FORMAT==100
+SkipCheck;
+FeedStrings;
+
+############################################################################################################
+# Region - WAIT
+[ 'P0','M Sys RushTI Configuration':'ProcessName'] = S:
+If(
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'WAIT') @<> ''
+  , 'WAIT'
+  , Continue
+);
+
+[ 'P0','M Sys RushTI Configuration':'InstanceName'] = S:
+If(
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'WAIT') @<> ''
+  , ''
+  , Continue
+);
+
+# EndRegion - WAIT
+############################################################################################################
+
+############################################################################################################
+# Region - Input Control
+
+## Proc Index: 000 (Default Setting by RushTI ID)
+[ 'Sys RushTI Process Index':'000', 'Sys RushTI Process Parameter':'P0'] = S:
+If( 
+  !M Sys RushTI Configuration @= 'Mode'
+  % !M Sys RushTI Configuration @= 'Max Threads'
+  % !M Sys RushTI Configuration @= 'Retry Times'
+  % !M Sys RushTI Configuration @= 'Result File Name'
+  , STET
+  , ''
+);
+[ 'Sys RushTI Process Index':'000'] = S: '';
+
+## Predecessors/ Require Predecessor Success/ InstanceName/ WAIT/ ProcessName
+[ 'M Sys RushTI Configuration':{'Predecessors','Require Predecessor Success','InstanceName','WAIT','ProcessName'}] = S: 
+If( 
+  !Sys RushTI Process Parameter @<> 'P0'
+  , ''
+  , Continue
+);
+
+## Instruction (for column display)
+[ 'Sys RushTI Process Parameter':'All RushTI Process Parameters', 'M Sys RushTI Configuration':'ParamType'] = S: 
+If( 
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, 'P0', 'ProcessName') @= ''
+  , ''
+  , 'OPTIONAL: If blank = DO NOT pass value'
+);
+[ 'Sys RushTI Process Parameter':'All RushTI Process Parameters', 'M Sys RushTI Configuration':'ParamValue'] = S:
+If( 
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, 'P0', 'ProcessName') @= ''
+  , ''
+  , 'OPTIONAL: If blank = Pass blank to paramter'
+);
+
+## ParamType/ ParamValue
+[ 'Sys RushTI Process Parameter':{'All RushTI Process Parameters','P0'}, 'M Sys RushTI Configuration':{'ParamType','ParamValue'}] = S: '';
+## ParamValue blocked if ParamType is blank
+[ 'M Sys RushTI Configuration':'ParamValue'] = S: 
+If( 
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'ParamType') @= ''
+  , ''
+  , Continue
+);
+
+# EndRegion - Input Control
+############################################################################################################
+
+############################################################################################################
+# Region - Final result for display in Process Parameters Configuration
+[ 'M Sys RushTI Configuration':'Final - InstanceName'] = S: 
+If( 
+  !Sys RushTI Process Parameter @= 'P0' 
+  & DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'InstanceName') @= ''
+  & DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'ProcessName') @<> ''
+  , DB('Sys RushTI Parameter', 'Default InstanceName', 'Text')
+  , Continue
+);
+
+
+[ 'M Sys RushTI Configuration':{'Final - Predecessors','Final - Require Predecessor Success','Final - InstanceName','Final - WAIT','Final - ProcessName'}] = S: 
+If( 
+  !Sys RushTI Process Parameter @= 'P0'
+  , DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, SubSt( !M Sys RushTI Configuration, 9, Long( !M Sys RushTI Configuration) - 8))
+  , ''
+);
+
+# EndRegion - Final result for display in Process Parameters Configuration
+############################################################################################################
+
+############################################################################################################
+# Region - Parameter Name from '}APQ Process Paremters Info'
+[ 'M Sys RushTI Configuration':'ParamName' ] = S:
+DB( '}APQ Process Parameters Info',   
+  DB( 'Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, 'P0', 'ProcessName' )
+  ,   !Sys RushTI Process Parameter, 'Parameter');
+
+# EndRegion - Parameter Name from '}APQ Process Paremters Info'
+############################################################################################################
+
+
+
+############################################################################################################
+# Region - Process Flag
+[ 'M Sys RushTI Configuration':'Process Flag' ] = N:
+If(
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'ProcessName') @<> ''
+  , 1
+  , 0
+);
+
+# EndRegion - Process Flag
+############################################################################################################
+
+############################################################################################################
+# Region - Parameter Flag
+[ 'M Sys RushTI Configuration':'Parameter Flag' ] = N:
+If(
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'ParamName') @<> ''
+  , 1
+  , 0
+);
+
+# EndRegion - Parameter Flag
+############################################################################################################
+
+Feeders;
+############################################################################################################
+# Region - Parameter Name from '}APQ Process Paremters Info'
+[ 'Sys RushTI Process Parameter':'P0', 'M Sys RushTI Configuration':'ProcessName'] => 
+[ 'Sys RushTI Process Parameter':'All RushTI Process Parameters', 'M Sys RushTI Configuration':'ParamName'  ],
+[ 'Sys RushTI Process Parameter':'All RushTI Process Parameters', 'M Sys RushTI Configuration':'ParamValue' ],
+[ 'Sys RushTI Process Parameter':'All RushTI Process Parameters', 'M Sys RushTI Configuration':'ParamType'  ];
+
+# EndRegion - Parameter Name from '}APQ Process Paremters Info'
+############################################################################################################
+
+############################################################################################################
+# Region - Final result for display in Process Parameters Configuration
+[ 'Sys RushTI Process Parameter':'P0', 'M Sys RushTI Configuration':'ProcessName'] => 
+[ 'M Sys RushTI Configuration':'Final - Predecessors'                ],
+[ 'M Sys RushTI Configuration':'Final - Require Predecessor Success' ],
+[ 'M Sys RushTI Configuration':'Final - InstanceName'                ],
+[ 'M Sys RushTI Configuration':'Final - WAIT'                        ],
+[ 'M Sys RushTI Configuration':'Final - ProcessName'                 ];
+
+[ 'Sys RushTI Process Parameter':'P0', 'M Sys RushTI Configuration':'WAIT'] => 
+[ 'M Sys RushTI Configuration':'Final - WAIT'                        ],
+[ 'M Sys RushTI Configuration':'Final - ProcessName'                 ];
+
+# EndRegion - Final result for display in Process Parameters Configuration
+############################################################################################################
+
+############################################################################################################
+# Region - Process Flag
+[ 'M Sys RushTI Configuration':{'ProcessName','WAIT'}] => [ 'M Sys RushTI Configuration':'Process Flag' ];
+
+# EndRegion - Process Flag
+############################################################################################################
+
+############################################################################################################
+# Region - Parameter Flag
+[ 'Sys RushTI Process Parameter':'P0','M Sys RushTI Configuration':'ProcessName' ] => ['All RushTI Process Parameters','Parameter Flag'];
+
+# EndRegion - Parameter Flag
+############################################################################################################
+
+
+
+
