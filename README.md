@@ -3,7 +3,7 @@
 1. Download and put all rushti_cfg related objects from 'lib' folder to target instance data folder
 2. Restart instance
 
-## Configuration for this model
+## Configuration/ Testing
 1. ✏️Open cube: 'Sys RushTI Parameter' and maintain following information:
 >
 	1)	RushTI.py Path 			(e.g. D:/DBs/RushTI_Cfg/Script/rushti.py)
@@ -28,5 +28,12 @@
 >
 >	pRushTIID = Z999
 >
-## Start your 1st rushti_cfg
-1. 💪Open cube: 'Sys RushTI Configuration' to start your first rushti_cfg
+## Start your 1st rushti_cfg💪
+1. ✏️Open cube: 'Sys RushTI Configuration' and maintain following information:
+#### View: 1. RushTI Default Config
+>
+	1)	Mode:	NORM/ OPT	(Optional: Normal Mode/ Optimized Mode, If blank = NORM)
+	2)	Max Threads: 		(Optional: If blank = Default Maximum RushTI Threads from cube: 'Sys RushTI Paramter')
+	3) 	Retry Time:		(Optional: If blank = 0)
+	4)	Result File Name	(Optional: If blank = rushti.csv)
+>
