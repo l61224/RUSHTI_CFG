@@ -57,3 +57,9 @@
 
 >
 2. ⚙️Run TI: 'Sys.RushTI Configuration.Caller' to start your 1st rushti_cfg
+>
+	1)  pRushTIID: 		(Required: which you configured in cube: 'Sys RushTI Configuration')
+ 	2) pParaReplace: 	(Optional: split by comma, eg. <<pParam>>:10, <<pMDX>>:{[Year].[2025]+[Year].[2026]})
+  	3) pWaitExeCmd: 	(Optional: If blank = 0 = DO NOT WAIT, HIGHLY recommended that set 'pWaitExeCmd' = 0 when USER trigger (to avoid deadlock))
+   	4) pSleepTime: 		(Optional (If blank = DO NOT SLEEP/ 1 = 1 second, 'pSleepTime' to let the user wait a few seconds before RushTI call the task file)
+>
