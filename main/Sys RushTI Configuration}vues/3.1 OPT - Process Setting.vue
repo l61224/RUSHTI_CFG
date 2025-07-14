@@ -1,0 +1,66 @@
+﻿389,100
+390,"3.1 OPT - Process Setting"
+370,0
+361,1
+362,1
+363,0
+364,0
+365,
+366,
+367,0
+376,1
+375,c:0.#########
+374,2
+7,Sys RushTI ID
+270,0
+274,Label
+275,103
+{EXCEPT({[Sys RushTI ID].[Sys RushTI ID].Members},{[Sys RushTI ID].[Sys RushTI ID].[All Rush TI IDs]})}
+281,0
+282,
+7,Sys RushTI Process Parameter
+270,0
+274,
+275,44
+TM1SubsetAll([Sys RushTI Process Parameter])
+281,0
+282,
+360,1
+7,M Sys RushTI Configuration
+270,0
+274,
+275,191
+{[M Sys RushTI Configuration].[InstanceName],[M Sys RushTI Configuration].[ProcessName],[M Sys RushTI Configuration].[Predecessors],[M Sys RushTI Configuration].[Require Predecessor Success]}
+281,0
+282,
+371,1
+7,Sys RushTI Process Index
+270,0
+274,
+275,661
+{[Sys RushTI Process Index].[001],[Sys RushTI Process Index].[002],[Sys RushTI Process Index].[003],[Sys RushTI Process Index].[004],[Sys RushTI Process Index].[005],[Sys RushTI Process Index].[006],[Sys RushTI Process Index].[007],[Sys RushTI Process Index].[008],[Sys RushTI Process Index].[009],[Sys RushTI Process Index].[010],[Sys RushTI Process Index].[011],[Sys RushTI Process Index].[012],[Sys RushTI Process Index].[013],[Sys RushTI Process Index].[014],[Sys RushTI Process Index].[015],[Sys RushTI Process Index].[016],[Sys RushTI Process Index].[017],[Sys RushTI Process Index].[018],[Sys RushTI Process Index].[019],[Sys RushTI Process Index].[020]}
+281,0
+282,
+373,2
+1,T001
+1,P0
+372,0
+372,00
+384,0
+385,0
+377,4
+10
+53
+1732
+1172
+378,0
+382,255
+379,4
+0
+0
+0
+0
+11,20250710012510
+381,0
+32,6
+null\n
