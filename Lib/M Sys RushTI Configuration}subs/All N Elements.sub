@@ -1,0 +1,30 @@
+﻿283,100
+284,"All N Elements"
+11,20250714022257
+274,
+18,0
+275,
+278,0
+281,0
+270,21
+ProcessName
+InstanceName
+ParamName
+ParamType
+ParamValue
+Mode
+Max Threads
+Retry Times
+Result File Name
+Process Flag
+Parameter Flag
+WAIT
+Predecessors
+Require Predecessor Success
+Final - Predecessors
+Final - Require Predecessor Success
+Final - ProcessName
+Final - InstanceName
+Final - WAIT
+Comment
+Latest Execution ParamValue
