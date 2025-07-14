@@ -3,7 +3,7 @@
 1. Download and put all rushti_cfg related objects from 'lib' folder to target instance data folder
 2. Restart instance
 
-## Usage
+## Configuration for this model
 1. ✏️Open cube: 'Sys RushTI Parameter' and maintain following information:
 >
 	1)	RushTI.py Path 			(e.g. D:/DBs/RushTI_Cfg/Script/rushti.py)
@@ -23,5 +23,10 @@
 	8)	SSL: 		(Required)
 	9)	Base64 Decode:	(Optional: Recommand to use base64 decode to avoid Special symbols in password)
 >
-3. 💪Open cube: 'Sys RushTI Configuration' to start your first rushti_cfg
-4. After configuration, Run TI: 'Sys.RushTI Configuration.Caller' to execute your first rushti_cfg
+3. ⚙️Run TI: 'Sys.RushTI Instance Information.Update' to update ./rushti-master/config.ini content
+4. ⚙️Run TI: 'Sys.RushTI Configuration.Caller' to check rushti connection
+>
+>	pRushTIID = Z999
+>
+## Start your 1st rushti_cfg
+1. 💪Open cube: 'Sys RushTI Configuration' to start your first rushti_cfg
