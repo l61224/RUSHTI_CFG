@@ -1,6 +1,6 @@
 <img width="460" height="330" alt="Hold_wo_BK" src="https://github.com/user-attachments/assets/deb6e321-a4c2-472c-8d2f-c57664f5d089" />
 
-# ❓Why RUSHT_CFG?
+# ❓Why RUSHTI_CFG?
 RUSHTI_CFG is a TM1 model that centralizes and simplifies [RushTI](https://github.com/cubewise-code/rushti) usage. It improves development, maintenance, and collaboration by managing all configurations within TM1 cubes.
 
 - **Faster** - Define```config.ini``` and ```task.txt``` directly in TM1 cubes.
@@ -24,7 +24,7 @@ RUSHTI_CFG is a TM1 model that centralizes and simplifies [RushTI](https://githu
 >
 2. Open cube: `Sys RushTI Instance Information` and maintain following information:
 >
-	1)	Instance Name:	(Required: Any Instnace Name your want/ Any name possible/ sensitive)
+	1)	Instance Name:	(Required: Any Instance Name your want/ Any name possible/ sensitive)
 	2)	Admin Host:	(Required: Admin host in ./instance/cfg/tm1s.cfg)
 	3)	HTTP Port:	(Required: HTTPPORTNumber in ./instance/cfg/tm1s.cfg)
 	4)	CAM Namespace:	(Optional)
