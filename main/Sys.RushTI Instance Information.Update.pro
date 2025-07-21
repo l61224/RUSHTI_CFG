@@ -4,7 +4,7 @@
 586,"Sys RushTI Instance Information"
 585,"Sys RushTI Instance Information"
 564,
-565,"nx7bJU<RCzg7Eaa1w\D0GLbprOPZYrI@^z:swcPdNyyhhzv;NBZJ]Rv0`4Ad0l2>f9S<2b\T2bRzYFmIv:YKC79FIIYh9\8w6A^v>e4R7X>H_FPF7EcFSUhXVjj9L=z6yZPr>O9jtbOa8RpZVX`opqpf^LgTWj=L\b8eY5X>:nq?z0yxs07el<rPBt[[chf;=F8E`tcU"
+565,"bnaTbE:QSSxKvHQ1h1CD7myd0n:LLjbC=oy@BOQaz8vXZ`SeMM^;aA<M?p?h3OHJe?W<GCIKUHr_z8r0TRGAOK7c0L=Wc>>`CgmGAVww\:M;1aKZG5;TE@Afag6GsqeYxVfQMul@sjwX]zhl9Ak`Jab6b?n^ue9IZZ4?17Rbi:6PR:y3Y^CraE_2dwFU9b1_?P^IFkIW"
 559,1
 928,0
 593,
@@ -68,7 +68,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,164
+572,165
 #Region - Header
 ##################################################################################################################
 # PURPOSE:
@@ -85,6 +85,7 @@ VarType=32ColType=827
 # CHANGE HISTORY:
 #   DATE          CHANGED BY          COMMENT
 #   2025-07-09    Jacky Lai           Create Process
+#   2025-07-21    Jacky Lai           Change to get all elements from 'M Sys RushTI Instance Information' then put to config.ini
 ##############################################################################################################
 #EndRegion - Header
 #****Begin: Generated Statements***
@@ -265,7 +266,7 @@ EndIf;
 ######################
 ### END Meta Data
 
-574,59
+574,50
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 ##############################################################################################################
@@ -280,17 +281,6 @@ sDebugFile = cDebugFile | '_Data.log';
 #Region - Definition
 ## String
 sInstanceName = CellGetS( cCubSrc, vInstance, vIndex, 'Instance Name');
-sEle01 = 'Admin Host';
-sEle02 = 'HTTP Port';
-sEle03 = 'CAM Namespace';
-sEle04 = 'User';
-sEle05 = 'Password';
-sEle06 = 'SSL';
-sEle07 = 'Base64 Decode';
-sEle08 = 'tenant_id';
-sEle09 = 'client_id';
-sEle10 = 'client_secret';
-sEle11 = 'path_custom';
 
 #EndRegion - Definition
 ##############################################################################################################
@@ -301,14 +291,16 @@ sEle11 = 'path_custom';
 TextOutput( cCfgFilePath, '[' | sInstanceName | ']');
 
 ## Print Instance Info.
-iMaxCount = 7;
+iMaxCount = DimSiz( 'M Sys RushTI Instance Information');
 iCount    = 1;
 While( iCount <= iMaxCount);
-  sEle = Expand ( '%' | Expand ( 'sEle'|NumberToStringEx( iCount, '00', '', ''))| '%');
-  sColumn = AttrS( 'M Sys RushTI Instance Information', sEle, 'Column Name');
-  sColumn = If( sColumn @= '', sEle, sColumn); 
-  sValue   = CellGetS( cCubSrc, vInstance, vIndex, sEle);
-  TextOutput( cCfgFilePath, '' | sColumn | '=' | sValue);
+  sEle = DimNm( 'M Sys RushTI Instance Information', iCount);
+  If( sEle @<> 'Last Config File Update Time');
+    sColumn = AttrS( 'M Sys RushTI Instance Information', sEle, 'Column Name');
+    sColumn = If( sColumn @= '', sEle, sColumn); 
+    sValue   = CellGetS( cCubSrc, vInstance, vIndex, sEle);
+    TextOutput( cCfgFilePath, '' | sColumn | '=' | sValue);
+  EndIf;
   iCount = iCount + 1;
 End;
 

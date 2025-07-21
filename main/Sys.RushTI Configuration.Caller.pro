@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"wlJ87sLxY8>b5R`j5c<EbwCa7j=Vk8szzu\o9sI`1nGuwHTyj2UbMjw_]xgmre_6pg>9Q1>:=vyP:sBQJC>2Lq`4bGD_`zVD4Im7U?QONPsDiDP8Rske>C`:IEx>vRQJ\z`htv6r?@@6P>D_kCmQ?OqUJ:0Zgwf_Nxkt_37V?7cPP0OJc;E[Enftod^nI3rWh;OXJ8:H"
+565,"eyf`8aEr9FZcDkq>ZB<AUexoz`T@BtMHTKYwbRTxDJ6xc@s]PkYN[90:4c9dOIVH>17\PNL3d7^92Q5CI?U29h=`qP]qOoYZ:so]jy?_<<Y^q9>NR\R<2o>pZ9uhRlcNCd4kdfCO>O0?4vA9VrlQof`o8;g7FWM=CZn70LPwkk]L>@>\TskYKuV;bRW_4s2mMHz1c\XO"
 559,1
 928,0
 593,
@@ -262,7 +262,7 @@ While( nProcCount <= nTTLProcCount);
   sInstName       = CellGetS( cCubSrc, cRushTIID, sLineItem, 'P0', 'InstanceName');
   sPreDecessors   = CellGetS( cCubSrc, cRushTIID, sLineItem, 'P0', 'Predecessors');
   sReqSuccess     = CellGetS( cCubSrc, cRushTIID, sLineItem, 'P0', 'Require Predecessor Success');
-  If( sInstName @= '' % sInstName @= 'Default Instnace'); sInstName = CellGetS( cCubRushParam, 'Default InstanceName', 'Text'); EndIf;
+  If( sInstName @= '' % sInstName @= 'Default Instance'); sInstName = CellGetS( cCubRushParam, 'Default InstanceName', 'Text'); EndIf;
   nTTLParamCount  = CellGetN( cCubSrc, cRushTIID, sLineItem, 'All RushTI Process Parameters', 'Parameter Flag');
   
   If( sProcName @= 'WAIT');
