@@ -24,7 +24,7 @@ RUSHTI_CFG is a TM1 model that centralizes and simplifies [RushTI](https://githu
 >
 2. Open cube: `Sys RushTI Instance Information` and maintain following information:
 >
-	1)	Instance Name:	(Required: Any Instnace Name your want/ Any name possible/ sensitive)
+	1)	Instance Name:	(Required: Any Instance Name your want/ Any name possible/ sensitive)
 	2)	Admin Host:	(Required: Admin host in ./instance/cfg/tm1s.cfg)
 	3)	HTTP Port:	(Required: HTTPPORTNumber in ./instance/cfg/tm1s.cfg)
 	4)	CAM Namespace:	(Optional)
