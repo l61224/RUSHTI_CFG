@@ -4,7 +4,7 @@
 586,"Sys RushTI Instance Information"
 585,"Sys RushTI Instance Information"
 564,
-565,"bnaTbE:QSSxKvHQ1h1CD7myd0n:LLjbC=oy@BOQaz8vXZ`SeMM^;aA<M?p?h3OHJe?W<GCIKUHr_z8r0TRGAOK7c0L=Wc>>`CgmGAVww\:M;1aKZG5;TE@Afag6GsqeYxVfQMul@sjwX]zhl9Ak`Jab6b?n^ue9IZZ4?17Rbi:6PR:y3Y^CraE_2dwFU9b1_?P^IFkIW"
+565,"p9p_:x5DmSe2aRJ7aAub6MpF4^@BL>z6Uqim7oYi>U1bx_u\bXLuA=D9rDkWC96NQj6qXwP1DaVWR[V]ropC`XgKRJG=3VCMG?TE2^IZl[8]<;<YzUWR1vcRqDpPU_bCvB;:IVLm\O;Sf9@2P_llClOeR]]V4<nGm_@XXGblQc<f;e2c38TapkyOU6;0BkZckB7JiEym"
 559,1
 928,0
 593,
@@ -266,7 +266,7 @@ EndIf;
 ######################
 ### END Meta Data
 
-574,50
+574,51
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 ##############################################################################################################
@@ -295,7 +295,8 @@ iMaxCount = DimSiz( 'M Sys RushTI Instance Information');
 iCount    = 1;
 While( iCount <= iMaxCount);
   sEle = DimNm( 'M Sys RushTI Instance Information', iCount);
-  If( sEle @<> 'Last Config File Update Time');
+  If( sEle @<> 'Instance Name'
+      & sEle @<> 'Last Config File Update Time');
     sColumn = AttrS( 'M Sys RushTI Instance Information', sEle, 'Column Name');
     sColumn = If( sColumn @= '', sEle, sColumn); 
     sValue   = CellGetS( cCubSrc, vInstance, vIndex, sEle);
