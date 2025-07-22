@@ -4,7 +4,7 @@
 586,"Sys RushTI Instance Information"
 585,"Sys RushTI Instance Information"
 564,
-565,"p9p_:x5DmSe2aRJ7aAub6MpF4^@BL>z6Uqim7oYi>U1bx_u\bXLuA=D9rDkWC96NQj6qXwP1DaVWR[V]ropC`XgKRJG=3VCMG?TE2^IZl[8]<;<YzUWR1vcRqDpPU_bCvB;:IVLm\O;Sf9@2P_llClOeR]]V4<nGm_@XXGblQc<f;e2c38TapkyOU6;0BkZckB7JiEym"
+565,"lithTJei8W\eayfqnYeTjk;zC<_KJ8V?xaaHcjHiQ^h<HT0S\sRO5lyM3Z\I[RR^dZ[jn;XxfIXg4_<gHBPI0bun9xB8p7Jt6`;?SElNbv]G:x^kZeqG3PSeBJvl]ELx0ZHET>S7H^2=rkpK4cTRrmY@>W>LTpu__K7sagS65f:LQVYsW0D2Ph>XqGOGvP]81eNK1\q6"
 559,1
 928,0
 593,
@@ -68,7 +68,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,165
+572,169
 #Region - Header
 ##################################################################################################################
 # PURPOSE:
@@ -86,6 +86,7 @@ VarType=32ColType=827
 #   DATE          CHANGED BY          COMMENT
 #   2025-07-09    Jacky Lai           Create Process
 #   2025-07-21    Jacky Lai           Change to get all elements from 'M Sys RushTI Instance Information' then put to config.ini
+#   2025-07-22    Jacky Lai           Change the name export to config.ini from 'Column Name' to 'Arguments Name'
 ##############################################################################################################
 #EndRegion - Header
 #****Begin: Generated Statements***
@@ -126,6 +127,9 @@ cCubSrc         = 'Sys RushTI Instance Information';
 cCubTgt         = 'Sys RushTI Instance Information';
 cCubSys         = 'Sys Parameter';
 cCubParam       = '}APQ Settings';
+cCubRushTIParam = 'Sys RushTI Parameter';
+cDimInstance    = 'Sys RushTI Instance';
+cDimMeausre     = 'M Sys RushTI Instance Information';
 sTimeStamp      = TimSt( Now, '\Y\m\d\h\i\s' );
 sRandomInt      = NumberToString( INT( RAND( ) * 1000 ));
 cViewSrcPrefix  = CellGetS( cCubParam, 'Std Datasource View Prefix', 'String' );
@@ -148,7 +152,7 @@ DatasourceASCIIQuoteCharacter='';
 cInstanceSrc    = 'Default Instance';
 cMeasureSrc     = 'Instance Name';
 
-cCfgFilePath    = CellGetS( 'Sys RushTI Parameter', 'RushTI Config.ini Path', 'Text');
+cCfgFilePath    = CellGetS( cCubRushTIParam, 'RushTI Config.ini Path', 'Text');
 
 #EndRegion - Declare Constants
 ##############################################################################################################
@@ -256,8 +260,8 @@ sInstanceName = CellGetS( cCubSrc, vInstance, vIndex, 'Instance Name');
 
 ##############################################################################################################
 # Region - Write Meta Data
-If( DimIx( 'Sys RushTI Instance', sInstanceName) = 0);
-  DimensionElementInsert( 'Sys RushTI Instance', '', sInstanceName, 'N');
+If( DimIx( cDimInstance, sInstanceName) = 0);
+  DimensionElementInsert( cDimInstance, '', sInstanceName, 'N');
 EndIf;
 
 # EndRegion - Write Meta Data
@@ -291,13 +295,13 @@ sInstanceName = CellGetS( cCubSrc, vInstance, vIndex, 'Instance Name');
 TextOutput( cCfgFilePath, '[' | sInstanceName | ']');
 
 ## Print Instance Info.
-iMaxCount = DimSiz( 'M Sys RushTI Instance Information');
+iMaxCount = DimSiz( cDimMeausre);
 iCount    = 1;
 While( iCount <= iMaxCount);
-  sEle = DimNm( 'M Sys RushTI Instance Information', iCount);
+  sEle = DimNm( cDimMeausre, iCount);
   If( sEle @<> 'Instance Name'
       & sEle @<> 'Last Config File Update Time');
-    sColumn = AttrS( 'M Sys RushTI Instance Information', sEle, 'Column Name');
+    sColumn = AttrS( cDimMeausre, sEle, 'Arguments Name');
     sColumn = If( sColumn @= '', sEle, sColumn); 
     sValue   = CellGetS( cCubSrc, vInstance, vIndex, sEle);
     TextOutput( cCfgFilePath, '' | sColumn | '=' | sValue);
