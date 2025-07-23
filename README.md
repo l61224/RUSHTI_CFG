@@ -32,7 +32,10 @@ RUSHTI_CFG is a TM1 model that centralizes and simplifies [RushTI](https://githu
 	6)	Password:	(Required)
 	7)	SSL: 		(Required)
 	8)	Base64 Decode:	(Optional: Recommand to use base64 decode to avoid Special symbols in password)
+
+>	If the arguments you need are not include, all you need to do is add them to the dimension: 'M Sys RushTI Instance Infromation'
 >
+
 3. Run TI: `Sys.RushTI Instance Information.Update` to update `./rushti-master/config.ini`.
 4. Run TI: `Sys.RushTI Configuration.Caller` to check rushti connection (you will see some Tester processes running)
 >
