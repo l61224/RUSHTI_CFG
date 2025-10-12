@@ -1,0 +1,21 @@
+﻿FORMAT==100
+SkipCheck;
+
+['ProcessName'] = S:
+If(
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'Instance Name') @= ''
+  % DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'Instance Name') @= 'Default Instance'
+  , 'Subset:Sys RushTI Process:' | DB('Sys RushTI Parameter', 'Default InstanceName', 'Text')
+  , Continue
+);
+
+['ProcessName'] = S:
+If(
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'Instance Name') @<> ''
+  , 'Subset:Sys RushTI Process:' | DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, !Sys RushTI Process Parameter, 'Instance Name')
+  , Continue
+);
+
+
+
+Feeders;

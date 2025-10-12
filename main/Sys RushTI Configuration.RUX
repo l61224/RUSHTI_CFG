@@ -94,13 +94,14 @@ If(
 ############################################################################################################
 
 ############################################################################################################
-# Region - Parameter Name from '}APQ Process Paremters Info'
+# Region - Parameter Name from 'Sys RushTI Process Parameter Information'
 [ 'M Sys RushTI Configuration':'ParamName' ] = S:
-DB( '}APQ Process Parameters Info',   
-  DB( 'Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, 'P0', 'ProcessName' )
+DB( 'Sys RushTI Process Parameter Information',   
+  DB('Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, 'P0', 'Final - InstanceName')
+  , DB( 'Sys RushTI Configuration', !Sys RushTI ID, !Sys RushTI Process Index, 'P0', 'Final - ProcessName' )
   ,   !Sys RushTI Process Parameter, 'Parameter');
 
-# EndRegion - Parameter Name from '}APQ Process Paremters Info'
+# EndRegion - Parameter Name from 'Sys RushTI Process Parameter Information'
 ############################################################################################################
 
 

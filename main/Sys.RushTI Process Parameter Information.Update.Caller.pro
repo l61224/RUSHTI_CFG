@@ -1,10 +1,10 @@
 ﻿601,100
-602,"Sys.RushTI Instance Information.Update"
+602,"Sys.RushTI Process Parameter Information.Update.Caller"
 562,"VIEW"
 586,"Sys RushTI Instance Information"
 585,"Sys RushTI Instance Information"
 564,
-565,"snaO8:k[1oasnwisIXNaBM]G2u_q[_EB<]DXMfxx82wZSK89>QX[zDV5M4KlnzY_=ZMhcuV:H37zhRcOjdG73^_@?1hdCyWxMUVjrNRbS?Lclyw>_K^?1tmq2c7s[9r6u_6bGCU3QNuCS>n04_mGmCGQcba]Mw=wLvCKQoGp425Ga1k;<nO4pQv5Uwgaop4u1DbX_N@0"
+565,"f\>GF<aFJOrN\4UL>whAOm9utoa<1aNIEiyl5Y=[CMko6Ldh<h3auOpPs0wSUzlu59U9IY[KrlrsGt`x>t`sZrv3[SOphgPSuT6i5Wr?[:GwPa2^FZnwXh5>g2ZAEV5c=DBBKjAE@UWaWy\uKNL@PM@5[54@xo9B@?PD?F<\;oGghox19CJ0;x<@eJY7H4P_?zy:VPhl"
 559,1
 928,0
 593,
@@ -30,9 +30,9 @@
 590,0
 637,0
 577,4
-vInstance
-vIndex
-vMeasure
+vSysRushTIInstance
+vSysRushTIInstanceIndex
+vMSysRushTIInstanceInformation
 vValue
 578,4
 2
@@ -60,60 +60,54 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,110
+572,109
 #Region - Header
 ##################################################################################################################
 # PURPOSE:
-#    Update config.ini file for RushTI used
+#    Call 'Sys.RushTI Process Parameter Information.Update'
 #
 # DATA SOURCE:
-#     Cube: 'Sys RushTI Instance Information'/ 'Instance Name'
+#     Cube: 'Sys RushTI Instance Information'/ 'Data Folder Path'
 #
 # REMARK:
-#     This process will:
-#         1. Update config.ini
-#         2. Update dim: 'Sys RushTI Instance'
 #   
 # CHANGE HISTORY:
 #   DATE          CHANGED BY          COMMENT
-#   2025-07-09    Jacky Lai           Create Process
-#   2025-07-21    Jacky Lai           Change to get all elements from 'M Sys RushTI Instance Information' then put to config.ini
-#   2025-07-22    Jacky Lai           Change the name export to config.ini from 'Column Name' to 'Arguments Name'
-#   2025-09-24    Jacky Lai           Remove APQ Framework
+#   2025-09-14    Jacky Lai           Create Process
 ##############################################################################################################
 #EndRegion - Header
-
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
-### Prolog script commences
 ##############################################################################################################
 #Region - Declare Constants
 # Standard naming convention for source and target cubes/dimensions
 cCubSrc         = 'Sys RushTI Instance Information';
-cCubTgt         = 'Sys RushTI Instance Information';
-cCubSys         = 'Sys Parameter';
-cCubParam       = '}APQ Settings';
-cCubRushTIParam = 'Sys RushTI Parameter';
+cCubTgt         = 'Sys RushTI Process Parameter Information';
 cDimInstance    = 'Sys RushTI Instance';
-cDimMeausre     = 'M Sys RushTI Instance Information';
+sThisProcName   = GetProcessName();
 sTimeStamp      = TimSt( Now, '\Y\m\d\h\i\s' );
 sRandomInt      = NumberToString( INT( RAND( ) * 1000 ));
-sThisProcName = GetProcessName(); 
 cViewSrc        = sThisProcName |'_'| sTimeStamp |'_'| sRandomInt;
 cSubSrc         = cViewSrc;
- 
-DatasourceASCIIQuoteCharacter='';
+cViewClr        = sThisProcName |'_'| sTimeStamp |'_'| sRandomInt;
+cSubClr         = cViewClr;
+sErr            = ''; 
  
 # String
 cInstanceSrc    = 'Default Instance';
-cMeasureSrc     = 'Instance Name';
-
-cCfgFilePath    = CellGetS( cCubRushTIParam, 'RushTI Config.ini Path', 'Text');
+cMeasureSrc     = 'Data Folder Path';
 
 #EndRegion - Declare Constants
 ##############################################################################################################
+ 
+##############################################################################################################
+#Region - Data Clear
+CubeClearData(cCubTgt);
 
+#EndRegion - Data Clear
+##############################################################################################################
+ 
 ##############################################################################################################
 #Region - Create DataSource
 sDim01 = 'Sys RushTI Instance';               sElement01 = cInstanceSrc; sMdxCustomize01 = '';
@@ -153,13 +147,18 @@ While ( nCount <= nDims );
     Else;
         SubsetDestroy( sDim, sSub );
         sError = 'Dim:' | sDim | ' has no content in source subset, mdx = "' | sMdx | '"';
-        Logoutput( 'Error', sError);
+        
+        If (sErr @<> '');
+            sErr = sErr | Char(10) | Char(13);
+        Endif;
+        sErr = sErr | sError;
+        nError = 1;
     Endif;
     nCount = nCount + 1;
 End;
  
 ViewExtractSkipCalcsSet     (cCubSrc, cViewSrc, 1);
-ViewExtractSkipRuleValuesSet(cCubSrc, cViewSrc, 1);
+ViewExtractSkipRuleValuesSet(cCubSrc, cViewSrc, 0);
 ViewExtractSkipZeroesSet    (cCubSrc, cViewSrc, 1);
  
 ######################
@@ -171,88 +170,34 @@ DatasourceCubeView      = cViewSrc;
 #EndRegion - Create DataSource
 ##############################################################################################################
 
-573,27
+573,2
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-##############################################################################################################
- 
-######################
-#### Data script
- 
-##############################################################################################################
-#Region - Definition
-## String
-sInstanceName = CellGetS( cCubSrc, vInstance, vIndex, 'Instance Name');
-
-#EndRegion - Definition
-##############################################################################################################
-
-##############################################################################################################
-# Region - Write Meta Data
-If( DimIx( cDimInstance, sInstanceName) = 0);
-  DimensionElementInsert( cDimInstance, '', sInstanceName, 'N');
-EndIf;
-
-# EndRegion - Write Meta Data
-##############################################################################################################
- 
-######################
-### END Meta Data
-
-574,48
+574,21
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-##############################################################################################################
- 
-######################
-#### Data script
 
 ##############################################################################################################
 #Region - Definition
 ## String
-sInstanceName = CellGetS( cCubSrc, vInstance, vIndex, 'Instance Name');
+sInstanceName = CellGetS( cCubSrc, vSysRushTIInstance, vSysRushTIInstanceIndex, 'Instance Name');
+sLineItem     = vSysRushTIInstanceIndex;
 
 #EndRegion - Definition
 ##############################################################################################################
- 
-##############################################################################################################
-# Region - Write Config File\
-## Print Instance Name
-TextOutput( cCfgFilePath, '[' | sInstanceName | ']');
 
-## Print Instance Info.
-iMaxCount = DimSiz( cDimMeausre);
-iCount    = 1;
-While( iCount <= iMaxCount);
-  sEle = DimNm( cDimMeausre, iCount);
-  If( sEle @<> 'Instance Name'
-      & sEle @<> 'Last Config File Update Time');
-    sColumn = AttrS( cDimMeausre, sEle, 'Arguments Name');
-    sColumn = If( sColumn @= '', sEle, sColumn); 
-    sValue   = CellGetS( cCubSrc, vInstance, vIndex, sEle);
-    TextOutput( cCfgFilePath, '' | sColumn | '=' | sValue);
-  EndIf;
-  iCount = iCount + 1;
-End;
+#############################################################################################################
+# Region - Call Sub TI
+ExecuteProcess('Sys.RushTI Process Parameter Information.Update',
+                'pInstance', sInstanceName,
+                'pLineItem', sLineItem
+               );
 
-# EndRegion - Write Config File
+# EndRegion - Call Sub TI
 ##############################################################################################################
- 
-##############################################################################################################
-# Region - Write Log
-sUpdateTime = TimSt( Now(), '\Y-\m-\d, \h:\i:\s');
-CellPutS( sUpdateTime, cCubTgt, vInstance, vIndex, 'Last Config File Update Time');
-
-# EndRegion - Write Log
-##############################################################################################################
-  
-######################
-### END Data
-575,4
+575,2
 #****Begin: Generated Statements***
 #****End: Generated Statements****
- 
-### END Epilog
 576,
 930,0
 638,1
