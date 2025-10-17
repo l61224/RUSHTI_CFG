@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"aa407[YhvF\ZJhj3aD[Wy6B^fS]v@G[yrU35hXsVmxc20S0yAs\P>;87DsXle7wz]ODtbRZM9_eY_nHiT[Lfe`XFF2izS@f<9z_=?t1@HApAX8W83mT0H:pYnaJ`Tp0e9Oy;_g@6V^=1Ayl3wDAz7WU0ezrfsa;10V]NoGDglYMpZ@4:aKRlFa@GoYs3hB6PQyD48mw["
+565,"nG_u[OUU1]5Ki2aY5ZCSoacS0zdQ70xt0om;4iq9So4ox;0v:hggsdmdSzwPYAfWu=ra:tI7Mkq;5ow0r79oLfQarHxMMa72Kdg6o@MUOzB9HN0_<L@qfvkvGw1AhKO6oJqm=q7V7rh@Jjkh<MO]OKBRHAAppoT9vMVwYmT4o6<5wE1cicobr>3npwCdBPebT75u1NOb"
 559,1
 928,0
 593,
@@ -50,7 +50,7 @@ vProcessName
 582,1
 VarType=32ColType=827
 603,0
-572,75
+572,81
 #Region - Header
 ##################################################################################################################
 # PURPOSE:
@@ -81,6 +81,11 @@ cDimRushTIProc  = 'Sys RushTI Process';
 nPosition       = 0;
 sThisProcName   = GetProcessName();
 cExportPath     = CellGetS( cCubSysParam, 'RushTI Task Export Folder', 'Text');
+
+If( SubSt( cExportPath, Long( cExportPath), 1 ) @= '\' 
+    % SubSt( cExportPath, Long( cExportPath), 1 ) @= '/' );
+  cExportPath = SubSt( cExportPath, 1, Long(cExportPath)-1 );
+EndIf;
 
 ## Parameter
 cInstance       = pInstance;
@@ -117,11 +122,12 @@ If( SubsetExists( cDimRushTIProc, cInstance) <> 0);
 EndIf;
 
 ## Generate Process List File
-cProcessListFile = 'C:\DBs\AdventureWorks\Export' | '\' | cInstance | '_rushtiprocesslist.txt';
+cProcessListFile = cExportPath | '\' | cInstance | '_rushtiprocesslist.txt';
 ExecuteCommand('cmd /C dir /b "' | cDataDirectory | '\*.pro*" | findstr /i "\.pro$" > ' | cProcessListFile, 1);
 
 DataSourceType ='CHARACTERDELIMITED';
 DatasourceNameForServer = cProcessListFile;
+DatasourceASCIIHeaderRecords=0;
 
 #EndRegion - Create Data Source
 ##############################################################################################################
@@ -129,7 +135,7 @@ DatasourceNameForServer = cProcessListFile;
 573,2
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-574,44
+574,45
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -169,6 +175,7 @@ If( ELLEV( cDimRushTIProc, sProcess ) = 0 );
                     'pProcessPath', sProcessPath, 
                     'pProcess'    , sTIName
                   );
+                  
   EndIf;
 EndIf;
 
@@ -183,7 +190,7 @@ EndIf;
 RunProcess('Sys.RushTI Process Parameter Information.Delete.File',
            'pFileName', cProcessListFile
           );
-          
+        
 #Region - Delete Process List File
 ##############################################################################################################
 576,CubeAction=1511DataAction=1503CubeLogChanges=0
